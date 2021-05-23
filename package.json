@@ -20,6 +20,7 @@
     "@webpack-cli/serve": "",
     "babel-loader": "",
     "clean-webpack-plugin": "",
+    "copy-webpack-plugin": "^9.0.0",
     "core-js": "",
     "html-webpack-plugin": "^5.3.1",
     "regenerator-runtime": "",

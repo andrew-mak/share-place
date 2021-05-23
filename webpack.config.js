@@ -1,16 +1,16 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: 'development',
   entry: {
-    'main': ['./src/main.ts'],
-    'myPlace': ['./src/myplace/myPlace.ts'],
+    'main': './src/main.ts',
+    'myplace': './src/myplace/myplace.ts',
   },
   output: {
-    filename: '[name].js',
+    filename: 'scripts/[name].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: 'dist/scripts/'
   },
   devtool: 'cheap-source-map',
   module: {
@@ -19,7 +19,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-      },
+      }
     ],
   },
   resolve: {
@@ -29,13 +29,19 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html",
-      chunks: ["sharePlace"]
+      chunks: ["main"]
     }),
     new HtmlWebPackPlugin({
       template: "./src/myplace/index.html",
       filename: "./myplace/index.html",
-      chunks: ["myPlace"]
-    })],
+      chunks: ["myplace"]
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "src/styles", to: "styles" }
+      ]
+    }),
+  ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,

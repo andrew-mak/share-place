@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CleanPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
 
@@ -8,12 +7,11 @@ module.exports = {
   mode: 'production',
   entry: {
     'main': ['./src/main.ts'],
-    'myplace': ['./src/myplace/myplace.ts'],
+    'myplace': ['./src/myplace.ts'],
   },
   output: {
     filename: 'scripts/[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    path: path.resolve(__dirname, 'public'),
   },
   devtool: 'source-map',
   module: {
@@ -28,7 +26,8 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: [new CleanPlugin.CleanWebpackPlugin(), new HtmlWebPackPlugin({
+  plugins: [
+    new HtmlWebPackPlugin({
     template: "./src/index.html",
     filename: "./index.html",
     chunks: ["main"]
@@ -40,7 +39,7 @@ module.exports = {
   }),
   new CopyPlugin({
     patterns: [
-      { from: "src/styles", to: "styles" }
+      { from: "src/styles", to: "styles" },
     ]
   }),
   ]

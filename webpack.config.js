@@ -6,11 +6,11 @@ module.exports = {
   mode: 'development',
   entry: {
     'main': './src/main.ts',
-    'myplace': './src/myplace/myplace.ts',
+    'myplace': './src/myplace.ts',
   },
   output: {
     filename: 'scripts/[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
   },
   devtool: 'cheap-source-map',
   module: {
@@ -38,12 +38,12 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: "src/styles", to: "styles" }
+        { from: "src/styles", to: "styles" },
       ]
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'public'),
     compress: true,
     port: 8080,
   },

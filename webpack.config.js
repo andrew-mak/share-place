@@ -39,13 +39,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "src/styles", to: "styles" },
-        { from: "src/assets", to: "assets" },
-        { from: "src/public", to: "./" },
       ]
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'public'),
     compress: true,
     port: 8080,
   },
